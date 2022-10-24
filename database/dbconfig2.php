@@ -11,7 +11,7 @@
 
 	}
 	catch (PDOException $exc){
-		echo $exc -> getMessage();`
+		echo $exc -> getMessage();
 	}
     catch (PDOException $exc){
         echo $exc -> getMessage();
