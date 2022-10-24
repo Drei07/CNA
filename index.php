@@ -67,13 +67,7 @@ include_once 'dashboard/superadmin/controller/select-settings-configuration-cont
 					</div>
 
 					<div class="flex-col-c p-t-170 p-b-40">
-						<span class="txt1 p-b-9">
-							Don’t have an account?
-						</span>
-
-						<a href="public/user/create-account" class="txt3">
-							Sign up now
-						</a>
+  
 					</div>
 				</form>
 			</div>
