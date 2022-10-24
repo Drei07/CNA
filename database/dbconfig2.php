@@ -2,16 +2,16 @@
 	try {
 
 		// Localhost
-		$pdoConnect = new PDO("mysql:host=localhost;dbname=fisheryapp", "root", "");
+		// $pdoConnect = new PDO("mysql:host=localhost;dbname=fisheryapp", "root", "");
 
 		// Live
-		// $pdoConnect = new PDO("mysql:host=localhost;dbname=u867039073_fisheryapp", "u867039073_fisheryapp", "Andreishania12");
+		$pdoConnect = new PDO("mysql:host=localhost;dbname=u867039073_dhvsu_cna", "u867039073_dhvsu_cna", "Dhvsucna2022");
 
 		$pdoConnect->setAttribute(PDO:: ATTR_ERRMODE, PDO:: ERRMODE_EXCEPTION);
 
 	}
 	catch (PDOException $exc){
-		echo $exc -> getMessage();
+		echo $exc -> getMessage();`
 	}
     catch (PDOException $exc){
         echo $exc -> getMessage();
