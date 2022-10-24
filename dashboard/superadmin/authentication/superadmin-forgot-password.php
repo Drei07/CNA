@@ -1,8 +1,7 @@
 <?php
 require_once 'superadmin-class.php';
 //URL
-$main_url = "https://fishery-supplier-recommender.shop";
-
+$main_url = "https://dhvsu-cna.online";
 $superadmin = new SUPERADMIN();
 
 if($superadmin->is_logged_in()!="")

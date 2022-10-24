@@ -1,7 +1,7 @@
 <?php
 require_once 'admin-class.php';
 //URL
-$main_url = "https://fishery-supplier-recommender.shop";
+$main_url = "https://dhvsu-cna.online";
 $admin = new ADMIN();
 
 if($admin->is_logged_in()!="")

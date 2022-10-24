@@ -1,8 +1,7 @@
 <?php
 require_once 'user-class.php';
 //URL
-$main_url = "https://fishery-supplier-recommender.shop";
-
+$main_url = "https://dhvsu-cna.online";
 $user = new USER();
 
 if($user->is_logged_in()!="")

@@ -1,7 +1,6 @@
 <?php
 require_once '../../admin/authentication/admin-class.php';
-$main_url = "https://fishery-supplier-recommender.shop";
-
+$main_url = "https://dhvsu-cna.online";
 $reg_admin = new ADMIN();
 
 if(isset($_POST['btn-register'])) {
