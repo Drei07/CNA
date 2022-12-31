@@ -22,7 +22,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" href="../../src/img/<?php echo $logo ?>">
+	<link rel="shortcut icon" href="../../src/img/<?php echo $favicon ?>">
 	<link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../../src/node_modules/boxicons/css/boxicons.min.css">
 	<link rel="stylesheet" href="../../src/node_modules/aos/dist/aos.css" />
@@ -34,7 +34,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 	<!-- SIDEBAR -->
 	<section id="sidebar" class="hide">
-		<a href="#" class="brand"><img src="../../src/img/<?php echo $logo ?>" alt="logo" class="brand-img"></i>&nbsp;&nbsp;FSR</a>
+		<a href="#" class="brand"><img src="../../src/img/favicon_white.png" alt="logo" class="brand-img"></i>&nbsp;&nbsp;FSR</a>
 		<ul class="side-menu">
 			<li><a href="home"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
 			<li class="divider" data-text="main">Main</li>

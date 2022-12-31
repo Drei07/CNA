@@ -6,13 +6,12 @@ include_once 'controller/select-settings-configuration-controller.php';
 
 $superadmin_home = new SUPERADMIN();
 
-if(!$superadmin_home->is_logged_in())
-{
- $superadmin_home->redirect('../../public/superadmin/signin');
+if (!$superadmin_home->is_logged_in()) {
+	$superadmin_home->redirect('../../public/superadmin/signin');
 }
 
 $stmt = $superadmin_home->runQuery("SELECT * FROM superadmin WHERE superadminId=:uid");
-$stmt->execute(array(":uid"=>$_SESSION['superadminSession']));
+$stmt->execute(array(":uid" => $_SESSION['superadminSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
@@ -26,7 +25,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="shortcut icon" href="../../src/img/<?php echo $logo ?>">
+	<link rel="shortcut icon" href="../../src/img/<?php echo $favicon ?>">
 	<link href="../../src/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 	<link href="../../src/css/sb-admin-2.min.css?v=<?php echo time(); ?>" rel="stylesheet">
@@ -45,7 +44,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 			<!-- Sidebar - Brand -->
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="home  ">
 				<div class="sidebar-brand-icon rotate-n-15">
-					<img src="../../src/img/<?php echo $logo ?>" alt="logo" width="50px">
+					<img src="../../src/img/favicon_white.png" alt="logo" width="50px">
 				</div>
 				<div class="sidebar-brand-text mx-3">DHVSU CNA</div>
 			</a>
@@ -64,68 +63,23 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 			<hr class="sidebar-divider">
 
 			<!-- Heading -->
-      <div class="sidebar-heading">
-        Main
-      </div>
+			<div class="sidebar-heading">
+				Main
+			</div>
 
 			<!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Admin</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="admin-data">Data</a>
-            <a class="collapse-item" href="add-admin">Add Admin</a>
-          </div>
-        </div>
-      </li>
-
-			<!-- Nav Item - Utilities Collapse Menu -->
-			<!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
-          </div>
-        </div>
-      </li> -->
-			<!-- 
-      Divider
-      <hr class="sidebar-divider"> -->
-
-			<!-- Heading -->
-			<!-- <div class="sidebar-heading">
-        Addons
-      </div> -->
-
-			<!-- Nav Item - Pages Collapse Menu -->
-			<!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
-          </div>
-        </div>
-      </li> -->
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+					<i class="fas fa-fw fa-user"></i>
+					<span>Admin</span>
+				</a>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" href="admin-data">Data</a>
+						<a class="collapse-item" href="add-admin">Add Admin</a>
+					</div>
+				</div>
+			</li>
 
 			<!-- Nav Item - Charts -->
 
@@ -361,155 +315,111 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 					<!-- Content Row -->
 					<div class="row">
+						<!-- Content Row -->
 
-						<!-- Earnings (Monthly) Card Example -->
-						<div class="col-xl-3 col-md-6 mb-4">
-							<div class="card border-left-primary shadow h-100 py-2">
+						<div class="col-xl-3 col-md-6 mb-4" onclick="location.href='survey-data'" style="cursor:pointer;">
+							<div class="card border-left-info shadow h-100 py-2">
 								<div class="card-body">
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
-											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												Earnings (Monthly)</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+											<div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+												Total Survey</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">
+												<?php
+												$pdoQuery = "SELECT * FROM survey ";
+												$pdoResult1 = $pdoConnect->prepare($pdoQuery);
+												$pdoResult1->execute();
+
+												$survey_count = $pdoResult1->rowCount();
+
+												if ($survey_count <= 9) {
+												?>
+													0<?php echo $survey_count ?>
+												<?php
+
+												} else if ($survey_count >= 10) {
+												?>
+													<span><?php echo $survey_count ?>
+													<?php
+												}
+													?>
+											</div>
 										</div>
 										<div class="col-auto">
-											<i class="fas fa-calendar fa-2x text-gray-300"></i>
+											<i class="fas fa-book fa-2x text-gray-300"></i>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<!-- Earnings (Monthly) Card Example -->
 						<div class="col-xl-3 col-md-6 mb-4">
 							<div class="card border-left-success shadow h-100 py-2">
 								<div class="card-body">
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-												Earnings (Annual)</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-										</div>
-										<div class="col-auto">
-											<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+												Admin</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">
+												<?php
+												$pdoQuery = "SELECT * FROM admin";
+												$pdoResult2 = $pdoConnect->prepare($pdoQuery);
+												$pdoResult2->execute();
 
-						<!-- Earnings (Monthly) Card Example -->
-						<div class="col-xl-3 col-md-6 mb-4">
-							<div class="card border-left-info shadow h-100 py-2">
-								<div class="card-body">
-									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-											</div>
-											<div class="row no-gutters align-items-center">
-												<div class="col-auto">
-													<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-												</div>
-												<div class="col">
-													<div class="progress progress-sm mr-2">
-														<div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</div>
+												$admin_count = $pdoResult2->rowCount();
+
+												if ($admin_count <= 9) {
+												?>
+													0<?php echo $admin_count ?>
+												<?php
+
+												} else if ($admin_count >= 10) {
+												?>
+													<span><?php echo $admin_count ?>
+													<?php
+												}
+													?>
 											</div>
 										</div>
 										<div class="col-auto">
-											<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+											<i class="fas fa-lock fa-2x text-gray-300"></i>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<!-- Pending Requests Card Example -->
 						<div class="col-xl-3 col-md-6 mb-4">
-							<div class="card border-left-warning shadow h-100 py-2">
+							<div class="card border-left-primary shadow h-100 py-2">
 								<div class="card-body">
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
-											<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-												Pending Requests</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+												User</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">
+												<?php
+												$pdoQuery = "SELECT * FROM user";
+												$pdoResult3 = $pdoConnect->prepare($pdoQuery);
+												$pdoResult3->execute();
+
+												$user_count = $pdoResult3->rowCount();
+
+												if ($user_count <= 9) {
+												?>
+													0<?php echo $user_count ?>
+												<?php
+
+												} else if ($user_count >= 10) {
+												?>
+													<span><?php echo $user_count ?>
+													<?php
+												}
+													?>
+											</div>
 										</div>
 										<div class="col-auto">
-											<i class="fas fa-comments fa-2x text-gray-300"></i>
+											<i class="fas fa-users fa-2x text-gray-300"></i>
 										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Content Row -->
-
-					<div class="row">
-
-						<!-- Area Chart -->
-						<div class="col-xl-8 col-lg-7">
-							<div class="card shadow mb-4">
-								<!-- Card Header - Dropdown -->
-								<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-									<h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-									<div class="dropdown no-arrow">
-										<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-										</a>
-										<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-											<div class="dropdown-header">Dropdown Header:</div>
-											<a class="dropdown-item" href="#">Action</a>
-											<a class="dropdown-item" href="#">Another action</a>
-											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="#">Something else here</a>
-										</div>
-									</div>
-								</div>
-								<!-- Card Body -->
-								<div class="card-body">
-									<div class="chart-area">
-										<canvas id="myAreaChart"></canvas>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Pie Chart -->
-						<div class="col-xl-4 col-lg-5">
-							<div class="card shadow mb-4">
-								<!-- Card Header - Dropdown -->
-								<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-									<h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-									<div class="dropdown no-arrow">
-										<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-										</a>
-										<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-											<div class="dropdown-header">Dropdown Header:</div>
-											<a class="dropdown-item" href="#">Action</a>
-											<a class="dropdown-item" href="#">Another action</a>
-											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="#">Something else here</a>
-										</div>
-									</div>
-								</div>
-								<!-- Card Body -->
-								<div class="card-body">
-									<div class="chart-pie pt-4 pb-2">
-										<canvas id="myPieChart"></canvas>
-									</div>
-									<div class="mt-4 text-center small">
-										<span class="mr-2">
-											<i class="fas fa-circle text-primary"></i> Direct
-										</span>
-										<span class="mr-2">
-											<i class="fas fa-circle text-success"></i> Social
-										</span>
-										<span class="mr-2">
-											<i class="fas fa-circle text-info"></i> Referral
-										</span>
 									</div>
 								</div>
 							</div>
@@ -567,6 +477,10 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 	<!-- Page level custom scripts -->
 	<script src="../../src/js/demo/chart-area-demo.js"></script>
 	<script src="../../src/js/demo/chart-pie-demo.js"></script>
+
+
+	<script src="../../src/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 
 	<!-- SWEET ALERT -->
 	<?php

@@ -6,13 +6,12 @@ include_once 'controller/select-settings-configuration-controller.php';
 
 $superadmin_home = new SUPERADMIN();
 
-if(!$superadmin_home->is_logged_in())
-{
- $superadmin_home->redirect('../../public/superadmin/signin');
+if (!$superadmin_home->is_logged_in()) {
+	$superadmin_home->redirect('../../public/superadmin/signin');
 }
 
 $stmt = $superadmin_home->runQuery("SELECT * FROM superadmin WHERE superadminId=:uid");
-$stmt->execute(array(":uid"=>$_SESSION['superadminSession']));
+$stmt->execute(array(":uid" => $_SESSION['superadminSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
@@ -26,7 +25,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="shortcut icon" href="../../src/img/<?php echo $logo ?>">
+	<link rel="shortcut icon" href="../../src/img/<?php echo $favicon ?>">
 	<link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../../src/node_modules/boxicons/css/boxicons.min.css">
 	<link href="../../src/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -47,7 +46,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 			<!-- Sidebar - Brand -->
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="home  ">
 				<div class="sidebar-brand-icon rotate-n-15">
-					<img src="../../src/img/<?php echo $logo ?>" alt="logo" width="50px">
+					<img src="../../src/img/favicon_white.png" alt="logo" width="50px">
 				</div>
 				<div class="sidebar-brand-text mx-3">DHVSU CNA</div>
 			</a>
@@ -363,51 +362,51 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 					<!-- PROFILE CONFIGURATION -->
 
 					<section class="data-form">
-				<div class="header"></div>
-				<div class="registration">
-					<form action="controller/add-admin-controller.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
-						<div class="row gx-5 needs-validation">
+						<div class="header"></div>
+						<div class="registration">
+							<form action="controller/add-admin-controller.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()" novalidate style="overflow: hidden;">
+								<div class="row gx-5 needs-validation">
 
-							<div class="col-md-6">
-								<label for="first_name" class="form-label">First Name<span> *</span></label>
-								<input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" autocapitalize="on" maxlength="15" autocomplete="off" name="FName" id="first_name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required>
-								<div class="invalid-feedback">
-								Please provide a First Name.
+									<div class="col-md-6">
+										<label for="first_name" class="form-label">First Name<span> *</span></label>
+										<input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" autocapitalize="on" maxlength="15" autocomplete="off" name="FName" id="first_name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required>
+										<div class="invalid-feedback">
+											Please provide a First Name.
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<label for="middle_name" class="form-label">Middle Name</label>
+										<input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" autocapitalize="on" maxlength="15" autocomplete="off" name="MName" id="middle_name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)">
+										<div class="invalid-feedback">
+											Please provide a Middle Name.
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<label for="last_name" class="form-label">Last Name<span> *</span></label>
+										<input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" autocapitalize="on" maxlength="15" autocomplete="off" name="LName" id="last_name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required>
+										<div class="invalid-feedback">
+											Please provide a Last Name.
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<label for="email" class="form-label">Email<span> *</span></label>
+										<input type="email" class="form-control" autocapitalize="off" autocomplete="off" name="Email" id="email" required placeholder="Ex. juan@email.com">
+										<div class="invalid-feedback">
+											Please provide a valid Email.
+										</div>
+									</div>
+
 								</div>
-							</div>
 
-							<div class="col-md-6">
-								<label for="middle_name" class="form-label">Middle Name</label>
-								<input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" autocapitalize="on" maxlength="15" autocomplete="off" name="MName" id="middle_name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)">
-								<div class="invalid-feedback">
-								Please provide a Middle Name.
+								<div class="addBtn">
+									<button type="submit" class="primary" name="btn-register" id="btn-register" onclick="return IsEmpty(); sexEmpty();">Add</button>
 								</div>
-							</div>
-
-							<div class="col-md-6">
-								<label for="last_name" class="form-label">Last Name<span> *</span></label>
-								<input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" autocapitalize="on" maxlength="15" autocomplete="off" name="LName" id="last_name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required >
-								<div class="invalid-feedback">
-								Please provide a Last Name.
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<label for="email" class="form-label">Email<span> *</span></label>
-								<input type="email" class="form-control" autocapitalize="off" autocomplete="off" name="Email" id="email" required placeholder="Ex. juan@email.com">
-								<div class="invalid-feedback">
-								Please provide a valid Email.
-								</div>
-							</div>
-
+							</form>
 						</div>
-
-						<div class="addBtn">
-							<button type="submit" class="primary" name="btn-register" id="btn-register" onclick="return IsEmpty(); sexEmpty();">Add</button>
-						</div>
-					</form>
-                </div>
-            </section> <br>
+					</section> <br>
 				</div>
 			</div>
 		</div>

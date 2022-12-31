@@ -40,7 +40,7 @@ $admin_last_update = $admin["updated_at"];
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="shortcut icon" href="../../src/img/<?php echo $logo ?>">
+	<link rel="shortcut icon" href="../../src/img/<?php echo $favicon ?>">
 	<link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../../src/node_modules/boxicons/css/boxicons.min.css">
 	<link href="../../src/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -61,7 +61,7 @@ $admin_last_update = $admin["updated_at"];
 			<!-- Sidebar - Brand -->
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="home  ">
 				<div class="sidebar-brand-icon rotate-n-15">
-					<img src="../../src/img/<?php echo $logo ?>" alt="logo" width="50px">
+					<img src="../../src/img/favicon_white.png" alt="logo" width="50px">
 				</div>
 				<div class="sidebar-brand-text mx-3">DHVSU CNA</div>
 			</a>

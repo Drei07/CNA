@@ -25,6 +25,7 @@ $pdoExec = $pdoResult->execute(array());
 $system_logo = $pdoResult->fetch(PDO::FETCH_ASSOC);
 
 $logo = $system_logo['logo'];
+$favicon = $system_logo['favicon'];
 $system_logo_last_update = $system_logo['updated_at'];
 
 // SMTP MAILER

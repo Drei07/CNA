@@ -1,111 +1,84 @@
 <?php
-include_once '../../dashboard/superadmin/authentication/superadmin-forgot-password.php';
 include_once '../../dashboard/superadmin/controller/select-settings-configuration-controller.php';
+include_once '../../dashboard/superadmin/authentication/superadmin-forgot-password.php';
+
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" href="../../src/img/<?php echo $logo ?>">
-	<link rel="stylesheet" type="text/css" href="../../src/vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../../src/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="../../src/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-	<link rel="stylesheet" type="text/css" href="../../src/vendor/animate/animate.css">
-	<link rel="stylesheet" type="text/css" href="../../src/vendor/css-hamburgers/hamburgers.min.css">
-	<link rel="stylesheet" type="text/css" href="../../src/vendor/animsition/css/animsition.min.css">
-	<link rel="stylesheet" type="text/css" href="../../src/vendor/select2/select2.min.css">
-	<link rel="stylesheet" type="text/css" href="../../src/vendor/daterangepicker/daterangepicker.css">
-	<link rel="stylesheet" type="text/css" href="../../src/css/util.css?v=<?php echo time(); ?>">
-	<link rel="stylesheet" type="text/css" href="../../src/css/main.css?v=<?php echo time(); ?>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<script src="https://www.google.com/recaptcha/api.js?render=<?php echo $SiteKEY ?>"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-	<title>Superadmin | Forgot Password?</title>
+    <link rel="shortcut icon" href="../../src/img/<?php echo $favicon ?>">
+
+    <title>CNA | Superadmin | Forgot Password?</title>
+
+    <link href="../../src/css/signin.css?v=<?php echo time(); ?>" rel="stylesheet">
+
+
 </head>
 
 <body>
-	<div class="container-login100">
-		<div class="wrap-login100">
-			<form action="../../dashboard/superadmin/authentication/superadmin-forgot-passwor" method="POST" novalidate="" class="login100-form validate-form p-l-55 p-r-55 p-t-178">
-				<span class="login100-form-title">
-					Forgot Password?
-				</span>
+    <div class="session">
+        <div class="left">
+            <svg enable-background="new 0 0 300 302.5" version="1.1" viewBox="0 0 300 302.5" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                <style type="text/css">
+                    .st0 {
+                        fill: #fff;
+                    }
+                </style>
+                <path class="st0" d="m126 302.2c-2.3 0.7-5.7 0.2-7.7-1.2l-105-71.6c-2-1.3-3.7-4.4-3.9-6.7l-9.4-126.7c-0.2-2.4 1.1-5.6 2.8-7.2l93.2-86.4c1.7-1.6 5.1-2.6 7.4-2.3l125.6 18.9c2.3 0.4 5.2 2.3 6.4 4.4l63.5 110.1c1.2 2 1.4 5.5 0.6 7.7l-46.4 118.3c-0.9 2.2-3.4 4.6-5.7 5.3l-121.4 37.4zm63.4-102.7c2.3-0.7 4.8-3.1 5.7-5.3l19.9-50.8c0.9-2.2 0.6-5.7-0.6-7.7l-27.3-47.3c-1.2-2-4.1-4-6.4-4.4l-53.9-8c-2.3-0.4-5.7 0.7-7.4 2.3l-40 37.1c-1.7 1.6-3 4.9-2.8 7.2l4.1 54.4c0.2 2.4 1.9 5.4 3.9 6.7l45.1 30.8c2 1.3 5.4 1.9 7.7 1.2l52-16.2z" />
+            </svg>
+        </div>
+        <form action="../../dashboard/superadmin/authentication/superadmin-forgot-password.php" method="POST" class="log-in" autocomplete="off">
+            <a href="../../"><img src="../../src/img/<?php echo $logo ?>" width="120px" alt=""></a><br><br>
+            <p>Forgot Password? Enter the email you used and we will send you an e-mail with a link to reset your password.</p>
+            <div class="floating-label">
+                <input placeholder="Email" type="email" name="email" id="email" autocomplete="off" required>
+                <label for="email">Email:</label>
+            </div>
+            <button type="submit" name="btn-forgot-password">Send</button>
+            <a href="signin" class="discrete" >Back to sign in</a>
+        </form>
+    </div>
+
+    <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../../src/node_modules/jquery/dist/jquery.min.js"></script>
 
 
-				<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter email">
-					<input class="input100" type="text" name="email" placeholder="email">
-					<span class="focus-input100"></span>
-				</div>
+    <script>
+        // CAPTCHA
+        grecaptcha.ready(function() {
+            grecaptcha.execute('<?php echo $SiteKEY ?>', {
+                action: 'submit'
+            }).then(function(token) {
+                document.getElementById("g-token").value = token;
+            });
+        });
+    </script>
 
-				<div class="wrap-input100 validate-input" style="opacity: 0;" data-validate="Please enter password">
-					<input class="input100" type="" name="" placeholder="">
-					<span class="focus-input100"></span>
-				</div>
+    <!-- SWEET ALERT -->
+    <?php
 
-				<div class="text-right p-t-13 p-b-23">
-					<span class="txt1">
-						Back
-					</span>
-
-					<a href="signin" class="txt2">
-						Signin >
-					</a>
-				</div>
-
-				<div class="container-login100-form-btn">
-					<button type="submit" name="btn-forgot-password" id="submit" class="login100-form-btn">
-						Send
-					</button>
-				</div><br><br>
-			</form>
-		</div>
-	</div>
-	<script src="../../src/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="../../src/vendor/animsition/js/animsition.min.js"></script>
-	<script src="../../src/vendor/bootstrap/js/popper.js"></script>
-	<script src="../../src/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="../../src/vendor/select2/select2.min.js"></script>
-	<script src="../../src/vendor/daterangepicker/moment.min.js"></script>
-	<script src="../../src/vendor/daterangepicker/daterangepicker.js"></script>
-	<script src="../../src/vendor/countdowntime/countdowntime.js"></script>
-	<script src="../../src/js/main.js"></script>
-	<script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
-	<script src="../../src/node_modules/jquery/dist/jquery.min.js"></script>
-
-
-	<script>
-		// CAPTCHA
-		grecaptcha.ready(function() {
-			grecaptcha.execute('<?php echo $SiteKEY ?>', {
-				action: 'submit'
-			}).then(function(token) {
-				document.getElementById("g-token").value = token;
-			});
-		});
-	</script>
-
-	<!-- SWEET ALERT -->
-	<?php
-
-	if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-	?>
-		<script>
-			swal({
-				title: "<?php echo $_SESSION['status_title']; ?>",
-				text: "<?php echo $_SESSION['status']; ?>",
-				icon: "<?php echo $_SESSION['status_code']; ?>",
-				button: false,
-				timer: <?php echo $_SESSION['status_timer']; ?>,
-			});
-		</script>
-	<?php
-		unset($_SESSION['status']);
-	}
-	?>
+    if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+    ?>
+        <script>
+            swal({
+                title: "<?php echo $_SESSION['status_title']; ?>",
+                text: "<?php echo $_SESSION['status']; ?>",
+                icon: "<?php echo $_SESSION['status_code']; ?>",
+                button: false,
+                timer: <?php echo $_SESSION['status_timer']; ?>,
+            });
+        </script>
+    <?php
+        unset($_SESSION['status']);
+    }
+    ?>
 </body>
 
 </html>

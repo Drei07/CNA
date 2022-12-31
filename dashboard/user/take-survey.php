@@ -1,18 +1,37 @@
 <?php
 include_once '../../database/dbconfig2.php';
-require_once 'authentication/superadmin-class.php';
-include_once 'controller/select-settings-configuration-controller.php';
+require_once 'authentication/user-class.php';
+include_once "../superadmin/controller/select-settings-configuration-controller.php";
 
 
-$superadmin_home = new SUPERADMIN();
+$user_home = new USER();
 
-if (!$superadmin_home->is_logged_in()) {
-	$superadmin_home->redirect('../../public/superadmin/signin');
+if (!$user_home->is_logged_in()) {
+	$user_home->redirect('../../');
 }
 
-$stmt = $superadmin_home->runQuery("SELECT * FROM superadmin WHERE superadminId=:uid");
-$stmt->execute(array(":uid" => $_SESSION['superadminSession']));
+$stmt = $user_home->runQuery("SELECT * FROM user WHERE userId=:uid");
+$stmt->execute(array(":uid" => $_SESSION['userSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$name = $row['userLast_Name'] . ', ' . $row['userFirst_Name'];
+$user_profile = $row['userProfile'];
+
+$UId 						= $row['userId'];
+$profile_user 				= $row['userProfile'];
+$user_ID 					= $row['uniqueID'];
+
+$surveyID = $_GET['Id'];
+
+$pdoQuery = "SELECT * FROM survey WHERE Id=$surveyID";
+$pdoResult = $pdoConnect->prepare($pdoQuery);
+$pdoExec = $pdoResult->execute();
+$survey_data = $pdoResult->fetch(PDO::FETCH_ASSOC);
+
+$title = $survey_data['title'];
+$description = $survey_data['description'];
+$start_date = $survey_data['start_date'];
+$end_date = $survey_data['end_date'];
 
 ?>
 <!DOCTYPE html>
@@ -31,9 +50,11 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 	<link href="../../src/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 	<link href="../../src/css/sb-admin-2.min.css?v=<?php echo time(); ?>" rel="stylesheet">
-	<title>Settings</title>
+	<title>Take Survey</title>
 
 </head>
+
+
 
 <body id="page-top">
 
@@ -46,7 +67,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 			<!-- Sidebar - Brand -->
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="home  ">
 				<div class="sidebar-brand-icon rotate-n-15">
-					<img src="../../src/img/favicon_white.png" alt="logo" width="50px">
+				<img src="../../src/img/favicon_white.png" alt="logo" width="50px">
 				</div>
 				<div class="sidebar-brand-text mx-3">DHVSU CNA</div>
 			</a>
@@ -56,7 +77,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item">
-				<a class="nav-link" href="home">
+				<a class="nav-link" href="home  ">
 					<i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>Dashboard</span></a>
 			</li>
@@ -64,96 +85,16 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 			<!-- Divider -->
 			<hr class="sidebar-divider">
 
-			<!-- Heading -->
-			<div class="sidebar-heading">
-				Main
-			</div>
-
-			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-					<i class="fas fa-fw fa-user"></i>
-					<span>Admin</span>
-				</a>
-				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="admin-data">Data</a>
-						<a class="collapse-item" href="add-admin">Add Admin</a>
-					</div>
-				</div>
+			<li class="nav-item active">
+				<a class="nav-link" href="survey-list">
+					<i class="fas fa-fw fa-book"></i>
+					<span>Survey List</span></a>
 			</li>
 
-			<!-- Nav Item - Utilities Collapse Menu -->
-			<!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
-          </div>
-        </div>
-      </li> -->
-			<!-- 
-      Divider
-      <hr class="sidebar-divider"> -->
-
-			<!-- Heading -->
-			<!-- <div class="sidebar-heading">
-        Addons
-      </div> -->
-
-			<!-- Nav Item - Pages Collapse Menu -->
-			<!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
-          </div>
-        </div>
-      </li> -->
-
-			<!-- Nav Item - Charts -->
-
 			<li class="nav-item">
-				<a class="nav-link" href="user-data">
-					<i class="fas fa-fw fa-user"></i>
-					<span>User</span></a>
-			</li>
-
-			<li class="nav-item ">
 				<a class="nav-link" href="profile">
 					<i class="fas fa-fw fa-user"></i>
 					<span>Profile</span></a>
-			</li>
-
-			<li class="nav-item ">
-				<a class="nav-link" href="logs">
-					<i class="fas fa-fw fa-book"></i>
-					<span>Audit trail</span></a>
-			</li>
-
-
-			<!-- Nav Item - Tables -->
-			<li class="nav-item active">
-				<a class="nav-link" href="settings">
-					<i class="fas fa-fw fa-wrench"></i>
-					<span>Settings</span></a>
 			</li>
 
 			<!-- Divider -->
@@ -326,18 +267,14 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $row['name']; ?></span>
-								<img class="img-profile rounded-circle" src="../../src/img/<?php echo $profile ?>">
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $name ?></span>
+								<img class="img-profile rounded-circle" src="../../src/img/<?php echo $user_profile ?>">
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 								<a class="dropdown-item" href="profile">
 									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 									Profile
-								</a>
-								<a class="dropdown-item" href="settings">
-									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-									Settings
 								</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -354,159 +291,111 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
-
-					<!-- Page Heading -->
-					<div class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Settings</h1>
-					</div>
-
-					<!-- PROFILE CONFIGURATION -->
-
-					<section class="data-form">
-						<div class="header"></div>
-						<div class="registration">
-							<form action="controller/update-system-config.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()" novalidate style="overflow: hidden;">
-								<div class="row gx-5 needs-validation">
-
-									<label class="form-label" style="text-align: left; padding-top: .5rem; padding-bottom: 2rem; font-size: 1rem; font-weight: bold;"><i class='bx bxs-edit'></i> System Configuration <p>Last update: <?php echo $system_config_last_update  ?></p></label>
-
-									<div class="col-md-6">
-										<label for="sname" class="form-label">System Name<span> *</span></label>
-										<input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="SName" id="sname" required value="<?php echo $system_name  ?>">
-										<div class="invalid-feedback">
-											Please provide a System Name.
-										</div>
-									</div>
-
-									<div class="col-md-6">
-										<label for="cright" class="form-label">System Copyright<span> *</span></label>
-										<input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="CRight" id="cright" required value="<?php echo $system_copyright ?>">
-										<div class="invalid-feedback">
-											Please provide a System Copyright.
-										</div>
-									</div>
-
-									<div class="col-md-6">
-										<label for="phone_number" class="form-label">Default Phone Number<span> *</span></label>
-										<div class="input-group flex-nowrap">
-											<span class="input-group-text" id="addon-wrapping">+63</span>
-											<input type="text" class="form-control numbers" autocapitalize="off" inputmode="numeric" autocomplete="off" name="PNumber" id="phone_number" minlength="10" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required value="<?php echo $system_number  ?>">
-										</div>
-									</div>
-
-									<div class="col-md-6">
-										<label for="email" class="form-label">Default Email<span> *</span></label>
-										<input type="email" class="form-control" autocapitalize="off" autocomplete="off" name="Email" id="email" required value="<?php echo $system_email  ?>">
-										<div class="invalid-feedback">
-											Please provide a valid Email.
-										</div>
-									</div>
-
-								</div>
-
-								<div class="addBtn">
-									<button type="submit" class="primary" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
-								</div>
-							</form>
-						</div>
-					</section>
-
-					<!-- System Logo  -->
+					<h1 class="title">Questions</h1>
+					<ul class="breadcrumbs">
+						<p><a href="home">Home</a></p>
+						<p class="divider">|</p>
+						<p><a href="survey-list">Survey Lists</a></p>
+						<p class="divider">|</p>
+						<p><a href="" class="active">Questions</a></p>
+					</ul>
 
 					<section class="data-form">
 						<div class="header"></div>
 						<div class="registration">
-							<form action="controller/update-logo-controller.php" method="POST" enctype="multipart/form-data" class="row gx-5 needs-validation" name="form" onsubmit="return validate()" novalidate style="overflow: hidden;">
-								<div class="row gx-5 needs-validation">
-
-									<label class="form-label" style="text-align: left; padding-top: .5rem; padding-bottom: 2rem; font-size: 1rem; font-weight: bold;"><i class='bx bxs-edit'></i> Logo Configuration <p>Last update: <?php echo $system_logo_last_update  ?></p></label>
-
-									<div class="col-md-12">
-										<label for="logo" class="form-label">Upload Logo<span> *</span></label>
-										<input type="file" class="form-control" name="Logo" id="logo" style="height: 33px ;" required>
-										<div class="invalid-feedback">
-											Please provide a Logo.
-										</div>
-									</div>
-
+							<div class="survey-data">
+								<div class="survey-details">
+									<h1><?php echo $title ?></h1>
+									<p><?php echo $description ?></p>
+									<p>Start Date : <?php echo date("M d, Y", strtotime($start_date)) ?></p>
+									<p>End Date : <?php echo date("M d, Y", strtotime($end_date)) ?></p>
 								</div>
-
-								<div class="addBtn" style="padding-top: 2rem;">
-									<button type="submit" class="primary" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
-								</div>
-							</form>
+							</div>
 						</div>
-					</section>
+					</section> <br>
 
-					<!-- SMTP MAILER -->
+					<?php
 
-					<section class="data-form">
-						<div class="header"></div>
-						<div class="registration">
-							<form action="controller/update-smtp-email-controller.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()" novalidate style="overflow: hidden;">
-								<div class="row gx-5 needs-validation">
+					$pdoQuery = "SELECT * FROM question WHERE survey_id = :survey_id AND status = :status";
+					$pdoResult1 = $pdoConnect->prepare($pdoQuery);
+					$pdoResult1->execute(array(":survey_id" => $surveyID, ":status" => "active"));
 
-									<label class="form-label" style="text-align: left; padding-top: .5rem; padding-bottom: 2rem; font-size: 1rem; font-weight: bold;"><i class='bx bxs-edit'></i> SMTP Email Configuration <p>Last update: <?php echo $email_config_last_update  ?></p></label>
 
-									<div class="col-md-6">
-										<label for="email" class="form-label">Email<span> *</span></label>
-										<input type="email" class="form-control" autocapitalize="off" autocomplete="off" name="Email" id="email" required placeholder="<?php echo $smtp_email  ?>">
-										<div class="invalid-feedback">
-											Please provide a valid Email.
+
+					while ($questions = $pdoResult1->fetch(PDO::FETCH_ASSOC)) {
+						$questionsID = $questions['Id'];
+
+						if ($questions == NULL) {
+					?>
+
+							<div class="no-data">
+								<h3>NO QUESTIONS AVAILABLE</h3>
+							</div>
+
+							<?php
+
+						} else {
+
+							$pdoQuery = "SELECT * FROM answer WHERE question_id = :question_id AND user_id = :user_id";
+							$pdoResult3 = $pdoConnect->prepare($pdoQuery);
+							$pdoExec = $pdoResult3->execute(array(":question_id" => $questionsID, ":user_id" => $UId));
+							$answer = $pdoResult3->rowCount();
+
+							if ($answer == 1) {
+							} else {
+							?>
+								<form action="controller/answer-survey-controller.php?userId=<?php echo $UId ?>&surveyId=<?php echo $surveyID ?>" class="needs-validation" method="POST" name="form" onsubmit="return validate()" novalidate style="overflow: hidden;">
+
+									<section class="data-form">
+										<div class="questions">
+											<div class="survey-data">
+												<div class="survey-details">
+													<h3><?php echo $questions['questions'] ?></h3>
+													<br>
+													<label for="answer" class="form-label">Select Answer<span> *</span></label>
+													<select type="text" class="form-select form-control" name="answer" id="answer" required>
+														<option selected disabled value="">------</option>
+														<?php
+														$pdoQuery = "SELECT * FROM scale ";
+														$pdoResult2 = $pdoConnect->prepare($pdoQuery);
+														$pdoResult2->execute();
+
+														while ($scale = $pdoResult2->fetch(PDO::FETCH_ASSOC)) {
+														?>
+															<option value="<?php echo $scale['Id']; ?> ">
+																<?php echo $scale['scale']  ?></option>
+														<?php
+														}
+														?>
+													</select>
+													<div class="invalid-feedback">
+														Please choose an answer.
+													</div>
+
+													<div class="col-md-6" style="opacity: 0;">
+														<input type="text" class="form-control" value="<?php echo $questions['Id'] ?>" autocapitalize="off" autocomplete="off" name="questionID" id="questionID">
+													</div>
+
+												</div>
+											</div>
 										</div>
+									</section><br>
+
+									<div class="addBtn">
+										<button type="submit" class="primary" name="btn-answer-survey" id="btn-answer-survey" onclick="return IsEmpty(); sexEmpty();">Submit</button>
 									</div>
+									<br><br>
 
-									<div class="col-md-6">
-										<label for="Gpassword" class="form-label">Generated Password<span> *</span></label>
-										<input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="GPassword" id="Gpassword" required placeholder="<?php echo $smtp_password  ?>">
-										<div class="invalid-feedback">
-											Please provide a Generated Password.
-										</div>
-									</div>
 
-								</div>
+								</form>
 
-								<div class="addBtn">
-									<button type="submit" class="primary" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
-								</div>
-							</form>
-						</div>
-					</section>
+					<?php
+							}
+						}
+					}
 
-					<!-- Google reCAPTCHA V3  -->
+					?>
 
-					<section class="data-form">
-						<div class="header"></div>
-						<div class="registration">
-							<form action="controller/update-google-recaptcha-controller.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()" novalidate style="overflow: hidden;">
-								<div class="row gx-5 needs-validation">
-
-									<label class="form-label" style="text-align: left; padding-top: .5rem; padding-bottom: 2rem; font-size: 1rem; font-weight: bold;"><i class='bx bxs-edit'></i> Google reCAPTCHA API Configuration <p>Last update: <?php echo $google_recaptcha_api_last_update  ?></p></label>
-
-									<div class="col-md-6">
-										<label for="Skey" class="form-label">Site Key<span> *</span></label>
-										<input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="SKey" id="Skey" required placeholder="<?php echo $SKey  ?>">
-										<div class="invalid-feedback">
-											Please provide a Site Key.
-										</div>
-									</div>
-
-									<div class="col-md-6">
-										<label for="Sskey" class="form-label">Site Secret Key<span> *</span></label>
-										<input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="SSKey" id="Sskey" required placeholder="<?php echo $SSKey  ?>">
-										<div class="invalid-feedback">
-											Please provide a Site Secret Key.
-										</div>
-									</div>
-
-								</div>
-
-								<div class="addBtn">
-									<button type="submit" class="primary" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
-								</div>
-							</form>
-						</div>
-					</section><br>
 				</div>
 			</div>
 		</div>
@@ -540,7 +429,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="authentication/superadmin-signout">Logout</a>
+					<a class="btn btn-primary" href="authentication/user-signout">Logout</a>
 				</div>
 			</div>
 		</div>

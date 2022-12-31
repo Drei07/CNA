@@ -38,7 +38,7 @@ $user_last_profile_update 	= $row['updated_at'];
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="shortcut icon" href="../../src/img/<?php echo $logo ?>">
+	<link rel="shortcut icon" href="../../src/img/<?php echo $favicon ?>">
 	<link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../../src/node_modules/boxicons/css/boxicons.min.css">
 	<link href="../../src/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -59,7 +59,7 @@ $user_last_profile_update 	= $row['updated_at'];
 			<!-- Sidebar - Brand -->
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="home  ">
 				<div class="sidebar-brand-icon rotate-n-15">
-					<img src="../../src/img/<?php echo $logo ?>" alt="logo" width="50px">
+				<img src="../../src/img/favicon_white.png" alt="logo" width="50px">
 				</div>
 				<div class="sidebar-brand-text mx-3">DHVSU CNA</div>
 			</a>
@@ -141,19 +141,16 @@ $user_last_profile_update 	= $row['updated_at'];
           </div>
         </div>
       </li> -->
-
+			<li class="nav-item">
+				<a class="nav-link" href="survey-list">
+					<i class="fas fa-fw fa-book"></i>
+					<span>Survey List</span></a>
+			</li>
 			<!-- Nav Item - Charts -->
 			<li class="nav-item active">
 				<a class="nav-link" href="profile">
 					<i class="fas fa-fw fa-user"></i>
 					<span>Profile</span></a>
-			</li>
-
-			<!-- Nav Item - Tables -->
-			<li class="nav-item">
-				<a class="nav-link" href="">
-					<i class="fas fa-fw fa-wrench"></i>
-					<span>Settings</span></a>
 			</li>
 
 			<!-- Divider -->
@@ -335,10 +332,6 @@ $user_last_profile_update 	= $row['updated_at'];
 									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 									Profile
 								</a>
-								<a class="dropdown-item" href="">
-									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-									Settings
-								</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
 									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -354,11 +347,12 @@ $user_last_profile_update 	= $row['updated_at'];
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
-
-					<!-- Page Heading -->
-					<div class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Profile</h1>
-					</div>
+					<h1 class="title">Profile</h1>
+					<ul class="breadcrumbs">
+						<p><a href="home">Home</a></p>
+						<p class="divider">|</p>
+						<p><a href="" class="active">Profile</a></p>
+					</ul>
 
 					<!-- PROFILE CONFIGURATION -->
 

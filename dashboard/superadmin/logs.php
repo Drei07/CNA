@@ -25,7 +25,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="shortcut icon" href="../../src/img/<?php echo $logo ?>">
+	<link rel="shortcut icon" href="../../src/img/<?php echo $favicon ?>">
 	<link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../../src/node_modules/boxicons/css/boxicons.min.css">
 	<link href="../../src/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -46,7 +46,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 			<!-- Sidebar - Brand -->
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="home  ">
 				<div class="sidebar-brand-icon rotate-n-15">
-					<img src="../../src/img/<?php echo $logo ?>" alt="logo" width="50px">
+					<img src="../../src/img/favicon_white.png" alt="logo" width="50px">
 				</div>
 				<div class="sidebar-brand-text mx-3">DHVSU CNA</div>
 			</a>
@@ -364,15 +364,15 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
 					<section class="data-table">
-                <div class="searchBx">
-                    <input type="input" placeholder="search . . . . . ." class="search" name="search_box" id="search_box"><button class="searchBtn"><i class="bx bx-search icon"></i></button>
-                </div>
+						<div class="searchBx">
+							<input type="input" placeholder="search . . . . . ." class="search" name="search_box" id="search_box"><button class="searchBtn"><i class="bx bx-search icon"></i></button>
+						</div>
 
-                <div class="table">
-                <div id="dynamic_content">
-                </div>
+						<div class="table">
+							<div id="dynamic_content">
+							</div>
 
-            </section>
+					</section>
 				</div>
 			</div>
 		</div>
@@ -433,36 +433,37 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 	<script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 
 	<script>
-        //live search---------------------------------------------------------------------------------------//
-        $(document).ready(function(){
+		//live search---------------------------------------------------------------------------------------//
+		$(document).ready(function() {
 
-load_data(1);
+			load_data(1);
 
-function load_data(page, query = '')
-{
-$.ajax({
-	url:"data-table/logs-data-table.php",
-	method:"POST",
-	data:{page:page, query:query},
-	success:function(data)
-	{
-	$('#dynamic_content').html(data);
-	}
-});
-}
+			function load_data(page, query = '') {
+				$.ajax({
+					url: "data-table/logs-data-table.php",
+					method: "POST",
+					data: {
+						page: page,
+						query: query
+					},
+					success: function(data) {
+						$('#dynamic_content').html(data);
+					}
+				});
+			}
 
-$(document).on('click', '.page-link', function(){
-var page = $(this).data('page_number');
-var query = $('#search_box').val();
-load_data(page, query);
-});
+			$(document).on('click', '.page-link', function() {
+				var page = $(this).data('page_number');
+				var query = $('#search_box').val();
+				load_data(page, query);
+			});
 
-$('#search_box').keyup(function(){
-var query = $('#search_box').val();
-load_data(1, query);
-});
+			$('#search_box').keyup(function() {
+				var query = $('#search_box').val();
+				load_data(1, query);
+			});
 
-});
+		});
 	</script>
 
 	<!-- SWEET ALERT -->

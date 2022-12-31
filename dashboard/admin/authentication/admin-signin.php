@@ -25,7 +25,7 @@ if($row['success'] == "true"){
    if($admin_login->login($email,$upass))
    {
    
-      $_SESSION['status_title'] = "Hey !";
+      $_SESSION['status_title'] = "Hello!";
       $_SESSION['status'] = "Welcome back! ";
       $_SESSION['status_code'] = "success";
       $_SESSION['status_timer'] = 10000;
