@@ -2,18 +2,18 @@
 class Database
 {
     // Localhost
-    private $host = "localhost";
-    private $db_name = "cna";
-    private $username = "root";
-    private $password = "";
-    public $conn;
+    // private $host = "localhost";
+    // private $db_name = "cna";
+    // private $username = "root";
+    // private $password = "";
+    // public $conn;
 
     // Live
-    // private $host = "localhost";
-    // private $db_name = "u867039073_dhvsu_cna";
-    // private $username = "u867039073_dhvsu_cna";
-    // private $password = "Dhvsucna2022";
-    // public $conn;
+    private $host = "localhost";
+    private $db_name = "u867039073_dhvsu_cna";
+    private $username = "u867039073_dhvsu_cna";
+    private $password = "Dhvsucna2022";
+    public $conn;
 
      
     public function dbConnection()

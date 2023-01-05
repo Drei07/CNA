@@ -478,7 +478,7 @@ $status = $survey_data['status'];
                                         ?>
                                         <script>
                                             var xValues = ["Stongly Agree", "Agree", "Slightly Agree", "Neither Agree nor Disagree", "Slightly Disagree", "Disagree", "Strongly Disagree"];
-                                            var yValues = [<?php echo $strongly_agree ?>, <?php echo $agree ?>, <?php echo $slightly_agree ?>, <?php echo $nor ?>, <?php echo $slightly_disagree ?>, <?php echo $disagree ?>, <?php echo $strongly_disagree ?>];
+                                            var yValues = [<?php echo $strongly_agree ?>, <?php echo $agree ?>, <?php echo $slightly_agree ?>, <?php echo $nor ?>, <?php echo $slightly_disagree ?>, <?php echo $disagree ?>, <?php echo $slightly_agree ?>];
                                             var barColors = ['#0080ff', '#00bfff', '#00ffbf', '#00ff80', '#ffff00', '#ffbf00', '#ff4000'];
 
                                             new Chart("<?php echo $questions['Id']; ?>", {
