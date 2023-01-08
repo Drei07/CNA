@@ -51,6 +51,7 @@ include_once 'dashboard/user/authentication/user-signin.php';
             
             <button type="submit" name="btn-signin">Sign in</button>
             <a href="public/user/forgot-password.php" class="discrete">Forget Password?</a>
+            <a href="create-account" class="discrete">Create Account</a>
         </form>
     </div>
 

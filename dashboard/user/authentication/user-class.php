@@ -33,19 +33,27 @@ class USER
   return $stmt;
  }
  
- public function register($type_of_customer,$first_name,$middle_name,$last_name,$phone_number,$email,$upass,$tokencode,$uniqueID)
+ public function register($FName,$MName,$LName,$Sex,$BirthDate,$Age,$CStatus,$Religion,$Province,$City,$Barangay,$Street,$PNumber,$email,$upass,$tokencode,$uniqueID)
  {
   try
   {       
    $password = md5($upass);
-   $stmt = $this->conn->prepare("INSERT INTO user(type_of_customer,userFirst_Name,userMiddle_Name,userLast_Name,userPhone_Number,userEmail,userPassword,tokencode,uniqueID) 
-                                        VALUES(:type_of_customer,:userFirst_Name,:userMiddle_Name,:userLast_Name,:userPhone_Number,:userEmail,:userPassword,:tokencode,:uniqueID)");
+   $stmt = $this->conn->prepare("INSERT INTO user(userFirst_Name,userMiddle_Name,userLast_Name,Sex,Birth_Date,Age,Civil_Status,Religion,Province,City,Barangay,Street,userPhone_Number,userEmail,userPassword,tokencode,uniqueID) 
+                                        VALUES(:userFirst_Name,:userMiddle_Name,:userLast_Name,:Sex,:Birth_Date,:Age,:Civil_Status,:Religion,:Province,:City,:Barangay,:Street,:userPhone_Number,:userEmail,:userPassword,:tokencode,:uniqueID)");
    
-   $stmt->bindparam(":type_of_customer",$type_of_customer);
-   $stmt->bindparam(":userFirst_Name",$first_name);
-   $stmt->bindparam(":userMiddle_Name",$middle_name);
-   $stmt->bindparam(":userLast_Name",$last_name);
-   $stmt->bindparam(":userPhone_Number",$phone_number);
+   $stmt->bindparam(":userFirst_Name",$FName);
+   $stmt->bindparam(":userMiddle_Name",$MName);
+   $stmt->bindparam(":userLast_Name",$LName);
+   $stmt->bindparam(":Sex",$Sex);
+   $stmt->bindparam(":Birth_Date",$BirthDate);
+   $stmt->bindparam(":Age",$Age);
+   $stmt->bindparam(":Civil_Status",$CStatus);
+   $stmt->bindparam(":Religion",$Religion);
+   $stmt->bindparam(":Province",$Province);
+   $stmt->bindparam(":City",$City);
+   $stmt->bindparam(":Barangay",$Barangay);
+   $stmt->bindparam(":Street",$Street);
+   $stmt->bindparam(":userPhone_Number",$PNumber);
    $stmt->bindparam(":userEmail",$email);
    $stmt->bindparam(":userPassword",$password);
    $stmt->bindparam(":tokencode",$tokencode);

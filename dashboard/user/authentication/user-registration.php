@@ -1,19 +1,31 @@
 <?php
 require_once 'user-class.php';
+
 //URL
-$main_url = "https://fishery-supplier-recommender.shop";
+// $main_url = "https://dhvsu-cna.online";
+
+//LOCALHOST
+$main_url = "http://localhost/CNA";
 
 $reg_user = new USER();
 
 
 if(isset($_POST['btn-register'])) {
 
-    $type_of_customer               = trim($_POST['ToC']);
-    $first_name                     = trim($_POST['FName']);
-    $middle_name                    = trim($_POST['MName']);
-    $last_name                      = trim($_POST['LName']);
-    $phone_number                   = trim($_POST['PNumber']);
+    $FName                          = trim($_POST['FName']);
+    $MName                          = trim($_POST['MName']);
+    $LName                          = trim($_POST['LName']);
+    $Sex                            = trim($_POST['Sex']);
+    $BirthDate                      = trim($_POST['BirthDate']);
+    $Age                            = trim($_POST['Age']);
+    $CStatus                        = trim($_POST['CStatus']);
+    $Religion                       = trim($_POST['Religion']);
+    $PNumber                        = trim($_POST['PNumber']);
     $email                          = trim($_POST['Email']);
+    $Province                       = trim($_POST['Province']);
+    $City                           = trim($_POST['City']);
+    $Barangay                       = trim($_POST['Barangay']);
+    $Street                         = trim($_POST['Street']);
 
 
     // Generate Password
@@ -25,7 +37,7 @@ if(isset($_POST['btn-register'])) {
     $tokencode      = md5(uniqid(rand()));
 
     //uniqueID
-    $uniqueID            = str_pad(mt_rand(1,99999999),8,'0',STR_PAD_LEFT);
+    $uniqueID            = "PRNTID-".(str_pad(mt_rand(1,99999999),8,'0',STR_PAD_LEFT));
 
     $stmt = $reg_user->runQuery("SELECT * FROM user WHERE userEmail=:email_id");
     $stmt->execute(array(":email_id"=>$email));
@@ -42,7 +54,7 @@ if(isset($_POST['btn-register'])) {
     }
     else
     {
-        if($reg_user->register($type_of_customer,$first_name,$middle_name,$last_name,$phone_number,$email,$upass,$tokencode,$uniqueID))
+        if($reg_user->register($FName,$MName,$LName,$Sex,$BirthDate,$Age,$CStatus,$Religion,$Province,$City,$Barangay,$Street,$PNumber,$email,$upass,$tokencode,$uniqueID))
         {   
         $id = $reg_user->lasdID();  
         $key = base64_encode($id);
@@ -51,7 +63,7 @@ if(isset($_POST['btn-register'])) {
         $message = "     
             Hello sir/maam $last_name,
             <br /><br />
-            Welcome to Fishery Supplier Recommender!
+            Welcome to Infant Milestone !
             <br /><br />
             Email:<br />$email
             Password:<br />$upass
@@ -76,7 +88,7 @@ if(isset($_POST['btn-register'])) {
             $_SESSION['status'] = "Something went wrong, please try again!";
             $_SESSION['status_code'] = "error";
             $_SESSION['status_timer'] = 10000000;
-            header('Location: ../../../registration');
+            header('Location: ../../../create-account');
 
         }
     }
