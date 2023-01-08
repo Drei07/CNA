@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 01, 2023 at 06:45 AM
+-- Generation Time: Jan 08, 2023 at 03:53 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.19
 
@@ -315,7 +315,13 @@ INSERT INTO `tb_logs` (`activityId`, `user`, `email`, `activity`, `date`) VALUES
 (30, 'User-sample@gmail.com', 'sample@gmail.com', 'Has successfully signed in', '2022-12-30 07:07:16 PM'),
 (31, 'Admin-Dhvsu.cna05@gmail.com', 'Dhvsu.cna05@gmail.com', 'Has successfully signed in', '2022-12-30 08:29:39 PM'),
 (32, 'User-sample@gmail.com', 'sample@gmail.com', 'Has successfully signed in', '2022-12-31 09:07:12 AM'),
-(33, 'Admin-Dhvsu.cna05@gmail.com', 'Dhvsu.cna05@gmail.com', 'Has successfully signed in', '2022-12-31 09:07:55 AM');
+(33, 'Admin-Dhvsu.cna05@gmail.com', 'Dhvsu.cna05@gmail.com', 'Has successfully signed in', '2022-12-31 09:07:55 AM'),
+(34, 'Admin-Dhvsu.cna05@gmail.com', 'Dhvsu.cna05@gmail.com', 'Has successfully signed in', '2023-01-01 02:02:46 PM'),
+(35, 'Admin-Dhvsu.cna05@gmail.com', 'Dhvsu.cna05@gmail.com', 'Has successfully signed in', '2023-01-01 02:02:54 PM'),
+(36, 'User-sample@gmail.com', 'sample@gmail.com', 'Has successfully signed in', '2023-01-07 01:44:24 PM'),
+(37, 'Admin-Dhvsu.cna05@gmail.com', 'Dhvsu.cna05@gmail.com', 'Has successfully signed in', '2023-01-07 01:45:33 PM'),
+(38, 'Superadmin-Dhvsu.cna05@gmail.com', 'Dhvsu.cna05@gmail.com', 'Has successfully signed in', '2023-01-07 01:46:15 PM'),
+(39, 'User-andrei.m.viscayno@gmail.com', 'andrei.m.viscayno@gmail.com', 'Has successfully signed in', '2023-01-08 10:51:04 PM');
 
 -- --------------------------------------------------------
 
@@ -329,6 +335,15 @@ CREATE TABLE `user` (
   `userFirst_Name` varchar(145) DEFAULT NULL,
   `userMiddle_Name` varchar(145) DEFAULT NULL,
   `userLast_Name` varchar(145) DEFAULT NULL,
+  `Sex` varchar(145) DEFAULT NULL,
+  `Birth_Date` varchar(145) DEFAULT NULL,
+  `Age` varchar(145) DEFAULT NULL,
+  `Civil_Status` varchar(145) DEFAULT NULL,
+  `Religion` varchar(145) DEFAULT NULL,
+  `Province` varchar(145) DEFAULT NULL,
+  `City` varchar(145) DEFAULT NULL,
+  `Barangay` varchar(145) DEFAULT NULL,
+  `Street` varchar(145) DEFAULT NULL,
   `userPhone_Number` varchar(145) DEFAULT NULL,
   `userEmail` varchar(145) DEFAULT NULL,
   `userPassword` varchar(145) DEFAULT NULL,
@@ -345,8 +360,8 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`userId`, `type_of_customer`, `userFirst_Name`, `userMiddle_Name`, `userLast_Name`, `userPhone_Number`, `userEmail`, `userPassword`, `userStatus`, `tokencode`, `userProfile`, `uniqueID`, `account_status`, `created_at`, `updated_at`) VALUES
-(197, '1', 'JOSE', 'DATU', 'SANTOS', '9776621929', 'sample@gmail.com', '42f749ade7f9e195bf475f37a44cafcb', 'Y', '031c7fdda5d95db88e25b112b16e9d72', 'profile-red.png', '68414511', 'active', '2022-07-05 11:39:33', '2022-11-20 07:48:09');
+INSERT INTO `user` (`userId`, `type_of_customer`, `userFirst_Name`, `userMiddle_Name`, `userLast_Name`, `Sex`, `Birth_Date`, `Age`, `Civil_Status`, `Religion`, `Province`, `City`, `Barangay`, `Street`, `userPhone_Number`, `userEmail`, `userPassword`, `userStatus`, `tokencode`, `userProfile`, `uniqueID`, `account_status`, `created_at`, `updated_at`) VALUES
+(197, '1', 'JOSE', 'DATU', 'SANTOS', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '9776621929', 'sample@gmail.com', '42f749ade7f9e195bf475f37a44cafcb', 'Y', '031c7fdda5d95db88e25b112b16e9d72', 'profile-red.png', '68414511', 'active', '2022-07-05 11:39:33', '2022-11-20 07:48:09');
 
 --
 -- Indexes for dumped tables
@@ -492,13 +507,13 @@ ALTER TABLE `system_logo`
 -- AUTO_INCREMENT for table `tb_logs`
 --
 ALTER TABLE `tb_logs`
-  MODIFY `activityId` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `activityId` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userId` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
+  MODIFY `userId` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
