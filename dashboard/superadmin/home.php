@@ -317,7 +317,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 					<div class="row">
 						<!-- Content Row -->
 
-						<div class="col-xl-3 col-md-6 mb-4" onclick="location.href='survey-data'" style="cursor:pointer;">
+						<div class="col-xl-3 col-md-6 mb-4" onclick="location.href=''" style="cursor:pointer;">
 							<div class="card border-left-info shadow h-100 py-2">
 								<div class="card-body">
 									<div class="row no-gutters align-items-center">

@@ -2,10 +2,10 @@
 require_once 'user-class.php';
 
 //URL
-// $main_url = "https://dhvsu-cna.online";
+$main_url = "https://dhvsu-cna.online";
 
 //LOCALHOST
-$main_url = "http://localhost/CNA";
+// $main_url = "http://localhost/CNA";
 
 $reg_user = new USER();
 
@@ -63,7 +63,7 @@ if(isset($_POST['btn-register'])) {
         $message = "     
             Hello sir/maam $last_name,
             <br /><br />
-            Welcome to Infant Milestone !
+            Welcome to DHVSU CNA !
             <br /><br />
             Email:<br />$email
             Password:<br />$upass
